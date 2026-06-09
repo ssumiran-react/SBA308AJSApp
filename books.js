@@ -30,13 +30,12 @@ export async function bookList() {
 
         booksLs.data.forEach(d => {
             const li = document.createElement("li");
-            const a = document.createElement("p");
-            //a.href = d.number;
-            a.textContent = d.title;
-            a.addEventListener("click", () => {
+            const p = document.createElement("p");
+            p.textContent = d.title;
+            p.addEventListener("click", () => {
                 getBookInfo(d);
             });
-            li.appendChild(a);
+            li.appendChild(p);
             ul.appendChild(li);
         })
         ul.classList = "submenu";
