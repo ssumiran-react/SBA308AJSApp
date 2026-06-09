@@ -119,11 +119,11 @@ export async function createCarouselItem() {
 
     let bImg = 0;
     for (bImg in housesLs.data) {
-        const img = document.createElement("p");
-        img.textContent = housesLs.data[bImg].emoji + " "+housesLs.data[bImg].house;
+        const p = document.createElement("p");
+        p.textContent = housesLs.data[bImg].emoji + " "+ housesLs.data[bImg].house;
         //img.src = housesLs.data[bImg].emoji;
         //img.alt = housesLs.data[bImg].house;
-        imgDiv.appendChild(img);
+        imgDiv.appendChild(p);
     }
     //console.log("mg ", bImg);
     let cnt = 0;
