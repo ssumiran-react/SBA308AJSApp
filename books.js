@@ -59,7 +59,7 @@ function getBookInfo(bookInfo) {
             }
         });
     }
-    
+
     const dataDiv = document.createElement("div");
     dataDiv.classList = "data-container";
 
@@ -76,37 +76,36 @@ function getBookInfo(bookInfo) {
         labDiv.classList = "column-label";
         const valDiv = document.createElement("div");
         valDiv.classList = "column-value";
-        const span = document.createElement("span");
-        span.classList = "placeholder";
+        const label = document.createElement("label");
 
         if (b.key == "number") { //"number": 1,
-            labDiv.textContent = "Serial Book:";
-            span.textContent = b.value;
+            labDiv.textContent = "Book Serial:";
+            label.textContent = b.value;
         } else if (b.key == "title") { //"title": "Harry Potter and the Sorcerer's Stone",
             labDiv.textContent = "Title:";
-            span.textContent = b.value;
+            label.textContent = b.value;
         } else if (b.key == "releaseDate") { //"releaseDate": "Jun 26, 1997",
             labDiv.textContent = "Release Date:";
-            span.textContent = b.value;
+            label.textContent = b.value;
         } else if (b.key == "description") { //"description": 
             labDiv.textContent = "Description:";
-            span.textContent = b.value;
+            label.textContent = b.value;
         } else if (b.key == "pages") { //"pages": 223,
             labDiv.textContent = "Pages:";
-            span.textContent = b.value;
+            label.textContent = b.value;
         } else if (b.key == "originalTitle") { //"originalTitle": "Harry Potter and the Sorcerer's Stone",
             continue;
             labDiv.textContent = "Original Title:";
-            span.textContent = b.value;
+            label.textContent = b.value;
         } else if (b.key == "cover") { //"cover": "https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/covers/1.png", 
             continue;
             labDiv.textContent = "Serial Book:";
-            span.textContent = b.value;
+            label.textContent = b.value;
         } else { //"index": 0
             continue;
         }
 
-        valDiv.appendChild(span);
+        valDiv.appendChild(label);
         rowDiv.appendChild(labDiv);
         rowDiv.appendChild(valDiv);
         dataDiv.appendChild(rowDiv);
@@ -137,7 +136,7 @@ export async function createCarouselItem() {   //console.log("caro ", booksLs.da
         img.alt = booksLs.data[bImg].title;
         imgDiv.appendChild(img);
     }
-    console.log("mg ", bImg);
+    //console.log("mg ", bImg);
     let cnt = 0;
 
     preBtn.addEventListener('click', () => {

@@ -32,9 +32,7 @@ body {
     position: relative;
 }
 
-.nav-item a,
-p,
-span {
+.nav-item a, p, span {
     display: block;
     color: #e0e0e0;
     padding: 20px 25px;
@@ -187,13 +185,14 @@ p {
 
 /* Start of Book Detail */
 .data-container {
+    box-sizing: border-box;
     background-color: #ffffff;
     width: 100%;
-    max-width: 500px;
+    /* max-width: 500px; */
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 20px;
 }
 
 .data-row {
@@ -209,17 +208,22 @@ p {
 
 /* Column 1: Labels */
 .column-label {
-    width: 40%;
+    width: 20%;
     font-weight: bold;
     color: #333333;
     text-transform: capitalize;
+    
     /* Makes first letters capital */
+    text-align: left;
 }
 
 /* Column 2: Values */
 .column-value {
-    width: 60%;
-    color: #666666;
+    width: 80%;
+    /* font-weight: bold; */
+    color: black;
+    text-align: left;
+    padding: 0px;
 }
 
 /* Light styling for placeholder text */
