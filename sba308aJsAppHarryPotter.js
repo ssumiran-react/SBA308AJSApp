@@ -1,7 +1,16 @@
-import * as books from "./books.js";
+import * as book from "./books.js";
 
 mainPage();
+let navPage;
 
-function mainPage() {
-    books.bookList();
+async function mainPage() {
+    generateSubMenu("books");
+    
+}
+
+async function generateSubMenu(navPage) { 
+    
+    const bookLs= book.getBooksInfo();
+    
+    //console.log("in b", booksLs);
 }
