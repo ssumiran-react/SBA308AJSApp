@@ -1,0 +1,231 @@
+/* Reset basic styles */
+* {
+    margin: 0;
+    padding: 30;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #292727;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Start Navbar Menu Submenu*/
+.navbar {
+    background-color: #1a1a2e;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-item a,
+p,
+span {
+    display: block;
+    color: #e0e0e0;
+    padding: 20px 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-item:hover>a {
+    /* Navbar mouse hover */
+    background-color: #16213e;
+    color: #00fff5;
+}
+
+.submenu {
+    /* sub menu*/
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #16213e;
+    list-style: none;
+    min-width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-item:hover .submenu {
+    /* sub menu mouse hover*/
+    display: block;
+}
+
+.submenu li a {
+    /* Submenu items */
+    padding: 12px 20px;
+    font-weight: normal;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #1a1a2e;
+}
+
+.submenu li:last-child a {
+    border-bottom: none;
+}
+
+.submenu li a:hover {
+    background-color: #0f3460;
+    color: #00fff5;
+}
+
+/* End Navbar Menu Submenu*/
+
+/* Page content areas */
+.section {
+    padding: 100px 20px 60px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Alternating backgrounds for sections */
+#about {
+    background-color: #394045;
+}
+
+#books {
+    background-color: #e3fafc;
+}
+
+#characters {
+    background-color: #f3f0ff;
+}
+
+#spells {
+    background-color: #e3fbf7;
+}
+
+#houses {
+    background-color: #fff4e6;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #1a1a2e;
+}
+
+p {
+    max-width: 600px;
+    font-size: 1.1rem;
+}
+
+
+/* Outer container that holds the slider and hides extra width */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Inner row that lines up images horizontally */
+.carousel-slide {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Force each image to fill the exact size of the container */
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Navigation buttons base styling */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    user-select: none;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Position buttons on the left and right edges */
+#prevBtn {
+    left: 15px;
+}
+
+#nextBtn {
+    right: 15px;
+}
+
+/* Start of Book Detail */
+.data-container {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.data-row {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Remove the bottom line from the last row */
+.data-row:last-child {
+    border-bottom: none;
+}
+
+/* Column 1: Labels */
+.column-label {
+    width: 40%;
+    font-weight: bold;
+    color: #333333;
+    text-transform: capitalize;
+    /* Makes first letters capital */
+}
+
+/* Column 2: Values */
+.column-value {
+    width: 60%;
+    color: #666666;
+}
+
+/* Light styling for placeholder text */
+.placeholder {
+    font-style: italic;
+    color: #cccccc;
+}
+
+/* End of Book Detail */
