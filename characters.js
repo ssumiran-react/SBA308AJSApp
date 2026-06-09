@@ -9,25 +9,21 @@ birthdate	string	The birthdate of the character. Format "Month Day, Year"
 */
 
 /*
-https://potterapi-fedeperin.vercel.app/en/books
-https://potterapi-fedeperin.vercel.app/en/books/random
+https://potterapi-fedeperin.vercel.app/en/characters
+https://potterapi-fedeperin.vercel.app/en/characters/random
 */
 const basedEnURL = "https://potterapi-fedeperin.vercel.app/en";
 
 const characterSection = document.createElement("section");
 characterSection.classList = "section";
-characterSection.setAttribute("id", "books");
+characterSection.setAttribute("id", "characters");
 const characterFrag = document.createDocumentFragment();
-
-
 
 export let charactersLs;
 
 export async function getCharactersInfo() {
     characterList();
     return charactersLs;
-    // bookSection.appendChild(bookFrag);
-    // document.body.appendChild(bookSection);
 }
 
 export async function characterList() {
@@ -56,7 +52,6 @@ export async function characterList() {
     } catch (err) {
         console.log(" Error: ", err);
     }
-
 }
 
 function getCharacterInfo(characterInfo) { 
@@ -72,13 +67,11 @@ function getCharacterInfo(characterInfo) {
     const dataDiv = document.createElement("div");
     dataDiv.classList = "data-container";
 
-    //Array.from.bookDetail.forEach(b => console.log("in clik"));
     const characterDetail = Object.entries(characterInfo).map(([key, value]) => {
         return { key, value };
     });
 
-    //bookDetail.forEach(b => { 
-    for (const b of characterDetail) { console.log("in clik", b);
+    for (const b of characterDetail) { //console.log("in clik", b);
         const rowDiv = document.createElement("div");
         rowDiv.classList = "data-row";
         const labDiv = document.createElement("div");
@@ -106,9 +99,11 @@ function getCharacterInfo(characterInfo) {
             labDiv.textContent = "Children:";
             
             b.value.forEach( c => {
-                if(label.textContent == "" )
+                if(label.textContent == "" ){
                     label.textContent = c;
-                label.textContent = label.textContent + ", "+c;
+                } else {
+                    label.textContent = label.textContent + ", "+c;
+                }
             })
             
         } else if (b.key == "image") { //"cover": "https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/covers/1.png", 

@@ -9,8 +9,6 @@ bookSection.classList = "section";
 bookSection.setAttribute("id", "books");
 const bookFrag = document.createDocumentFragment();
 
-
-
 export let booksLs;
 
 export async function getBooksInfo() {
@@ -137,7 +135,6 @@ export async function createCarouselItem() {   //console.log("caro ", booksLs.da
     }
     //console.log("mg ", bImg);
     let cnt = 0;
-
     preBtn.addEventListener('click', () => { //console.log(cnt, "  cnt preBtn mg ", (-cnt * 25));
         if (cnt <= 0) {
             cnt = bImg - 3;
