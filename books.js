@@ -117,17 +117,17 @@ function getBookInfo(bookInfo) {
 
 export async function createCarouselItem() {   //console.log("caro ", booksLs.data);
     const div = document.createElement("div");
-    div.classList.add = "carousel-container";
+    div.classList = "carousel-container";
     const imgDiv = document.createElement("div");
-    imgDiv.classList.add = "carousel-slide";
+    imgDiv.classList = "carousel-slide";
     const preBtn = document.createElement("button");
-    preBtn.classList.add = "carousel-btn";
+    preBtn.classList = "carousel-btn";
     preBtn.setAttribute("id", "prevBtn");
-    preBtn.textContent = "#10094";
+    preBtn.textContent = "<";
     const nexBtn = document.createElement("button");
-    nexBtn.classList.add = "carousel-btn";
-    nexBtn.setAttribute("id", "prevBtn");
-    nexBtn.textContent = "#10095";
+    nexBtn.classList = "carousel-btn";
+    nexBtn.setAttribute("id", "nextBtn");
+    nexBtn.textContent = ">";
 
     let bImg = 0;
     for (bImg in booksLs.data) {
@@ -139,28 +139,25 @@ export async function createCarouselItem() {   //console.log("caro ", booksLs.da
     //console.log("mg ", bImg);
     let cnt = 0;
 
-    preBtn.addEventListener('click', () => {
+    preBtn.addEventListener('click', () => { //console.log(cnt, "  cnt preBtn mg ", (-cnt * 25));
         if (cnt <= 0) {
-            cnt = bImg - 1;
+            cnt = bImg - 3;
         } else {
             cnt--;
         }
-        updateCarousel();
+        imgDiv.style.transform = 'translateX(' + (-cnt * 25) + '%)';
     })
 
-    nexBtn.addEventListener('click', () => {
+    nexBtn.addEventListener('click', () => { 
         // Loop back to the first image if at the end
-        if (cnt >= bImg - 1) {
+        if (cnt >= bImg - 3) {
             cnt = 0;
         } else {
             cnt++;
         }
-        updateCarousel();
+        imgDiv.style.transform = 'translateX(' + ( -cnt * 25) + '%)';
+        //console.log(cnt, "  cnt nexBtn mg ", (-cnt * 25));
     });
-
-    function updateCarousel() {  //move image to left or right based on the cnt
-        imgDiv.style.transform = 'translateX(' + (-cnt * 100) + '%)';
-    }
 
     div.appendChild(preBtn);
     div.appendChild(nexBtn);
@@ -169,5 +166,4 @@ export async function createCarouselItem() {   //console.log("caro ", booksLs.da
     bookSection.appendChild(bookFrag);
     document.body.appendChild(bookSection);
 }
-
 

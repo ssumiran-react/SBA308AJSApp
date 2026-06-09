@@ -130,9 +130,9 @@ p {
 /* Outer container that holds the slider and hides extra width */
 .carousel-container {
     position: relative;
-    width: 100%;
-    max-width: 600px;
-    height: 400px;
+    width: 80%;
+    /* max-width: 70%; */
+    height: 80%;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -148,14 +148,14 @@ p {
 
 /* Force each image to fill the exact size of the container */
 .carousel-slide img {
-    width: 100%;
-    height: 100%;
+    width: 25%;
+    height: 50%;
     object-fit: cover;
     flex-shrink: 0;
 }
 
 /* Navigation buttons base styling */
-.carousel-btn {
+.carousel-btnf {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -163,7 +163,7 @@ p {
     color: white;
     border: none;
     font-size: 24px;
-    padding: 12px 16px;
+    padding: 1px 6px;
     cursor: pointer;
     border-radius: 50%;
     user-select: none;
@@ -226,10 +226,5 @@ p {
     padding: 0px;
 }
 
-/* Light styling for placeholder text */
-.placeholder {
-    font-style: italic;
-    color: #cccccc;
-}
 
 /* End of Book Detail */
