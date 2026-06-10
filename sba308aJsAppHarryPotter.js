@@ -5,12 +5,13 @@ import * as spell from "./spells.js";
 
 mainPage();
 
-async function mainPage() {
+function mainPage() {
     const navBook = document.getElementById("navBooks");
     const navCharacter = document.getElementById("navCharacters");
     const navSpell = document.getElementById("navSpells");
     const navHouse = document.getElementById("navHouses");
-
+    book.getBooksInfo();
+    
     navBook.addEventListener("click", ()=>{
         book.getBooksInfo();
     });
@@ -24,4 +25,5 @@ async function mainPage() {
         house.getHousesInfo();
     });
 }
+
 
