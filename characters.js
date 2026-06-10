@@ -14,19 +14,18 @@ https://potterapi-fedeperin.vercel.app/en/characters/random
 */
 const basedEnURL = "https://potterapi-fedeperin.vercel.app/en";
 
-const characterSection = document.createElement("section");
-characterSection.classList = "section";
-characterSection.setAttribute("id", "characters");
+// const characterSection = document.createElement("section");
+// characterSection.classList = "section";
+// characterSection.setAttribute("id", "characters");
 const characterFrag = document.createDocumentFragment();
 
-export let charactersLs;
+let charactersLs;
 
 export async function getCharactersInfo() {
     characterList();
-    return charactersLs;
 }
 
-export async function characterList() {
+async function characterList() {
     try {
         //Using AXIOS method
         charactersLs = await axios.get(basedEnURL + "/characters", {});
@@ -37,7 +36,8 @@ export async function characterList() {
         charactersLs.data.forEach(d => {
             const li = document.createElement("li");
             const p = document.createElement("p");
-            p.textContent = d.nickname;
+            p.textContent = d.nickname;            
+            p.style.fontSize = "medium";
             p.addEventListener("click", () => {
                 getCharacterInfo(d);
             });
@@ -54,23 +54,29 @@ export async function characterList() {
     }
 }
 
-function getCharacterInfo(characterInfo) { 
-    const dataContainer = document.body.querySelectorAll("div.data-container");
-    if (dataContainer != null) {
-        dataContainer.forEach(el => { // Loop through and remove each element
-            if (el && el.parentNode) {
-                el.parentNode.removeChild(el); // Safe removal
-            }
-        });
-    }
-
-    const dataDiv = document.createElement("div");
-    dataDiv.classList = "data-container";
+async function getCharacterInfo(characterInfo) { 
+    // const dataContainer = document.body.querySelectorAll("div.data-container");
+    // if (dataContainer != null) {
+    //     dataContainer.forEach(el => { // Loop through and remove each element
+    //         if (el && el.parentNode) {
+    //             el.parentNode.removeChild(el); // Safe removal
+    //         }
+    //     });
+    // }
 
     const characterDetail = Object.entries(characterInfo).map(([key, value]) => {
         return { key, value };
     });
 
+    const hasDivInfo = document.querySelector("#dataInfo");
+    if (hasDivInfo){
+        hasDivInfo.remove();
+    }
+
+    const dataDiv = document.querySelector("#dataDiv");
+    const divInfo = document.createElement("div");
+    divInfo.setAttribute("id","dataInfo");
+    
     for (const b of characterDetail) { //console.log("in clik", b);
         const rowDiv = document.createElement("div");
         rowDiv.classList = "data-row";
@@ -117,18 +123,36 @@ function getCharacterInfo(characterInfo) {
         valDiv.appendChild(label);
         rowDiv.appendChild(labDiv);
         rowDiv.appendChild(valDiv);
-        dataDiv.appendChild(rowDiv);
+        divInfo.appendChild(rowDiv);
     }
-    characterFrag.appendChild(dataDiv);
-    characterSection.appendChild(characterFrag);
-    document.body.appendChild(characterSection);
+    dataDiv.appendChild(divInfo);
+    // characterFrag.appendChild(dataDiv);
+    // characterSection.appendChild(characterFrag);
+    // document.body.appendChild(characterSection);
 }
 
-export async function createCarouselItem() {   //console.log("caro ", booksLs.data);
-    const div = document.createElement("div");
-    div.classList = "carousel-container";
+async function createCarouselItem() {   //console.log("caro ", booksLs.data);
+    const div = document.querySelector("#carouselDiv");
+   
+    const hasImgDiv = document.querySelectorAll(".carousel-slide");
+    if (hasImgDiv) {
+        hasImgDiv.forEach(el => { // Loop through and remove each element
+            el.remove();
+            //console.log("in rev el");
+        });
+    }
+    
+    const btns = document.querySelectorAll(".carousel-btn");
+    if (btns) {                                              //console.log("btns t");
+        btns.forEach(el => {
+            el.remove();
+            //console.log("in rev el");
+        });
+    }
+
     const imgDiv = document.createElement("div");
     imgDiv.classList = "carousel-slide";
+
     const preBtn = document.createElement("button");
     preBtn.classList = "carousel-btn";
     preBtn.setAttribute("id", "prevBtn");
@@ -170,8 +194,8 @@ export async function createCarouselItem() {   //console.log("caro ", booksLs.da
     div.appendChild(preBtn);
     div.appendChild(nexBtn);
     div.appendChild(imgDiv);
-    characterFrag.appendChild(div);
-    characterSection.appendChild(characterFrag);
-    document.body.appendChild(characterSection);
+    // characterFrag.appendChild(div);
+    // characterSection.appendChild(characterFrag);
+    // document.body.appendChild(characterSection);
 }
 

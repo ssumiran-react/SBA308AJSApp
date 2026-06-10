@@ -27,7 +27,7 @@ async function bookList() {
             const li = document.createElement("li");
             const p = document.createElement("p");
             p.textContent = d.title;
-            p.style.fontSize = "small";
+            p.style.fontSize = "medium";
             p.addEventListener("click", () => {
                 getBookInfo(d);
             });
@@ -46,32 +46,19 @@ async function bookList() {
 }
 
 async function getBookInfo(bookInfo) {
-    // const dataContainer = document.body.querySelectorAll("div.data-container");
-    // if (dataContainer != null) {
-    //     dataContainer.forEach(el => { // Loop through and remove each element
-    //         if (el && el.parentNode) {
-    //             el.parentNode.removeChild(el); // Safe removal
-    //         }
-    //     });
-    // }
-    // removeElement(".data-container");
-
-    // const dataDiv = document.createElement("div");
-    // dataDiv.classList = "data-container";
-
     //Array.from.bookDetail.forEach(b => console.log("in clik"));
     const bookDetail = Object.entries(bookInfo).map(([key, value]) => {
         return { key, value };
     });
-    
+
     const hasDivInfo = document.querySelector("#dataInfo");
-    if (hasDivInfo){
+    if (hasDivInfo) {
         hasDivInfo.remove();
     }
 
     const dataDiv = document.querySelector("#dataDiv");
     const divInfo = document.createElement("div");
-    divInfo.setAttribute("id","dataInfo");
+    divInfo.setAttribute("id", "dataInfo");
 
     for (const b of bookDetail) {
         const rowDiv = document.createElement("div");
@@ -121,62 +108,36 @@ async function getBookInfo(bookInfo) {
 }
 
 async function createCarouselItem() {   //console.log("caro ", booksLs.data);
-    // const dataContainer = document.body.querySelectorAll("div.carousel-container");
-    // if (dataContainer != null) {
-    //     dataContainer.forEach(el => { // Loop through and remove each element
-    //         if (el && el.parentNode) {
-    //             el.parentNode.removeChild(el); // Safe removal
-    //         }
-    //     });
-    // }
-
-    //removeElement(".carousel-container");
-    // let div = null;
-    // if (document.getElementById("carouselDiv")) {
-    //     console.log("caro t");
-    //     document.getElementById("carouselDiv").remove();
-    // } else {
-    //     console.log("caroFf t");
-
-    // }
-    // div = document.createElement("div");
-    // div.classList = "carousel-container";
-    // div.setAttribute("id", "carouselDiv");
-
     const div = document.querySelector("#carouselDiv");
-    let imgDiv;
-    let preBtn;
-    let nexBtn;
 
     const hasImgDiv = document.querySelectorAll(".carousel-slide");
-    if (hasImgDiv){ //console.log("caro t");
-        hasImgDiv.forEach( el => {
-            el.remove(); 
-            //console.log("in rev el");
-        });
-    }
-    
-    const btns = document.querySelectorAll(".carousel-btn");
-    if (btns){                                              //console.log("btns t");
-        btns.forEach( el => {
-            el.remove(); 
+    if (hasImgDiv) { //console.log("caro t");
+        hasImgDiv.forEach(el => {
+            el.remove();
             //console.log("in rev el");
         });
     }
 
-     
-    imgDiv = document.createElement("div");
+    const btns = document.querySelectorAll(".carousel-btn");
+    if (btns) {                                              //console.log("btns t");
+        btns.forEach(el => {
+            el.remove();
+            //console.log("in rev el");
+        });
+    }
+
+    const imgDiv = document.createElement("div");
     imgDiv.classList = "carousel-slide";
 
-    preBtn = document.createElement("button");
+    const preBtn = document.createElement("button");
     preBtn.classList = "carousel-btn";
     preBtn.setAttribute("id", "prevBtn");
     preBtn.textContent = "<";
-    nexBtn = document.createElement("button");
+    const nexBtn = document.createElement("button");
     nexBtn.classList = "carousel-btn";
     nexBtn.setAttribute("id", "nextBtn");
     nexBtn.textContent = ">";
-        
+
     let bImg = 0;
     for (bImg in booksLs.data) {
         const img = document.createElement("img");
@@ -206,11 +167,11 @@ async function createCarouselItem() {   //console.log("caro ", booksLs.data);
         //console.log(cnt, "  cnt nexBtn mg ", (-cnt * 25));
     });
 
-    
+
     div.appendChild(preBtn);
     div.appendChild(nexBtn);
     div.appendChild(imgDiv);
-    
+
     // bookFrag.appendChild(div);
     // bookSection.appendChild(bookFrag);
     // document.body.appendChild(bookSection);
