@@ -4,21 +4,18 @@ https://potterapi-fedeperin.vercel.app/en/books/random
 */
 const basedEnURL = "https://potterapi-fedeperin.vercel.app/en";
 
-const bookSection = document.createElement("section");
-bookSection.classList = "section";
-bookSection.setAttribute("id", "books");
+// const bookSection = document.createElement("section");
+// bookSection.classList = "section";
+//bookSection.setAttribute("id", "books");
 const bookFrag = document.createDocumentFragment();
 
-export let booksLs;
+let booksLs;
 
 export async function getBooksInfo() {
     bookList();
-    return booksLs;
-    // bookSection.appendChild(bookFrag);
-    // document.body.appendChild(bookSection);
 }
 
-export async function bookList() {
+async function bookList() {
     try {
         //Using AXIOS method
         booksLs = await axios.get(basedEnURL + "/books", {});
@@ -30,6 +27,7 @@ export async function bookList() {
             const li = document.createElement("li");
             const p = document.createElement("p");
             p.textContent = d.title;
+            p.style.fontSize = "small";
             p.addEventListener("click", () => {
                 getBookInfo(d);
             });
@@ -47,25 +45,34 @@ export async function bookList() {
 
 }
 
-function getBookInfo(bookInfo) {
-    const dataContainer = document.body.querySelectorAll("div.data-container");
-    if (dataContainer != null) {
-        dataContainer.forEach(el => { // Loop through and remove each element
-            if (el && el.parentNode) {
-                el.parentNode.removeChild(el); // Safe removal
-            }
-        });
-    }
+async function getBookInfo(bookInfo) {
+    // const dataContainer = document.body.querySelectorAll("div.data-container");
+    // if (dataContainer != null) {
+    //     dataContainer.forEach(el => { // Loop through and remove each element
+    //         if (el && el.parentNode) {
+    //             el.parentNode.removeChild(el); // Safe removal
+    //         }
+    //     });
+    // }
+    // removeElement(".data-container");
 
-    const dataDiv = document.createElement("div");
-    dataDiv.classList = "data-container";
+    // const dataDiv = document.createElement("div");
+    // dataDiv.classList = "data-container";
 
     //Array.from.bookDetail.forEach(b => console.log("in clik"));
     const bookDetail = Object.entries(bookInfo).map(([key, value]) => {
         return { key, value };
     });
+    
+    const hasDivInfo = document.querySelector("#dataInfo");
+    if (hasDivInfo){
+        hasDivInfo.remove();
+    }
 
-    //bookDetail.forEach(b => { console.log("in clik", bookDetail[b]);
+    const dataDiv = document.querySelector("#dataDiv");
+    const divInfo = document.createElement("div");
+    divInfo.setAttribute("id","dataInfo");
+
     for (const b of bookDetail) {
         const rowDiv = document.createElement("div");
         rowDiv.classList = "data-row";
@@ -105,27 +112,71 @@ function getBookInfo(bookInfo) {
         valDiv.appendChild(label);
         rowDiv.appendChild(labDiv);
         rowDiv.appendChild(valDiv);
-        dataDiv.appendChild(rowDiv);
+        divInfo.appendChild(rowDiv);
     }
-    bookFrag.appendChild(dataDiv);
-    bookSection.appendChild(bookFrag);
-    document.body.appendChild(bookSection);
+    dataDiv.appendChild(divInfo);
+    // dataFrag.appendChild(dataDiv);
+    // bookSection.appendChild(bookFrag);
+    // document.body.appendChild(bookSection);
 }
 
-export async function createCarouselItem() {   //console.log("caro ", booksLs.data);
-    const div = document.createElement("div");
-    div.classList = "carousel-container";
-    const imgDiv = document.createElement("div");
+async function createCarouselItem() {   //console.log("caro ", booksLs.data);
+    // const dataContainer = document.body.querySelectorAll("div.carousel-container");
+    // if (dataContainer != null) {
+    //     dataContainer.forEach(el => { // Loop through and remove each element
+    //         if (el && el.parentNode) {
+    //             el.parentNode.removeChild(el); // Safe removal
+    //         }
+    //     });
+    // }
+
+    //removeElement(".carousel-container");
+    // let div = null;
+    // if (document.getElementById("carouselDiv")) {
+    //     console.log("caro t");
+    //     document.getElementById("carouselDiv").remove();
+    // } else {
+    //     console.log("caroFf t");
+
+    // }
+    // div = document.createElement("div");
+    // div.classList = "carousel-container";
+    // div.setAttribute("id", "carouselDiv");
+
+    const div = document.querySelector("#carouselDiv");
+    let imgDiv;
+    let preBtn;
+    let nexBtn;
+
+    const hasImgDiv = document.querySelectorAll(".carousel-slide");
+    if (hasImgDiv){ //console.log("caro t");
+        hasImgDiv.forEach( el => {
+            el.remove(); 
+            //console.log("in rev el");
+        });
+    }
+    
+    const btns = document.querySelectorAll(".carousel-btn");
+    if (btns){                                              //console.log("btns t");
+        btns.forEach( el => {
+            el.remove(); 
+            //console.log("in rev el");
+        });
+    }
+
+     
+    imgDiv = document.createElement("div");
     imgDiv.classList = "carousel-slide";
-    const preBtn = document.createElement("button");
+
+    preBtn = document.createElement("button");
     preBtn.classList = "carousel-btn";
     preBtn.setAttribute("id", "prevBtn");
     preBtn.textContent = "<";
-    const nexBtn = document.createElement("button");
+    nexBtn = document.createElement("button");
     nexBtn.classList = "carousel-btn";
     nexBtn.setAttribute("id", "nextBtn");
     nexBtn.textContent = ">";
-
+        
     let bImg = 0;
     for (bImg in booksLs.data) {
         const img = document.createElement("img");
@@ -144,22 +195,35 @@ export async function createCarouselItem() {   //console.log("caro ", booksLs.da
         imgDiv.style.transform = 'translateX(' + (-cnt * 25) + '%)';
     })
 
-    nexBtn.addEventListener('click', () => { 
+    nexBtn.addEventListener('click', () => {
         // Loop back to the first image if at the end
         if (cnt >= bImg - 3) {
             cnt = 0;
         } else {
             cnt++;
         }
-        imgDiv.style.transform = 'translateX(' + ( -cnt * 25) + '%)';
+        imgDiv.style.transform = 'translateX(' + (-cnt * 25) + '%)';
         //console.log(cnt, "  cnt nexBtn mg ", (-cnt * 25));
     });
 
+    
     div.appendChild(preBtn);
     div.appendChild(nexBtn);
     div.appendChild(imgDiv);
-    bookFrag.appendChild(div);
-    bookSection.appendChild(bookFrag);
-    document.body.appendChild(bookSection);
+    
+    // bookFrag.appendChild(div);
+    // bookSection.appendChild(bookFrag);
+    // document.body.appendChild(bookSection);
 }
 
+async function removeElement(elClass) {
+    const containr = document.body.querySelector(elClass);//   ".carousel-container");
+    console.log(" removeElement ", containr);
+    if (elClass == ".section") {
+
+    }
+    if (containr) {
+        console.log(" in remove ", elClass);
+        containr.remove();
+    }
+}
