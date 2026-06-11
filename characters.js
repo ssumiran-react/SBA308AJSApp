@@ -55,23 +55,11 @@ async function characterList() {
 }
 
 async function getCharacterInfo(characterInfo) { 
-    // const dataContainer = document.body.querySelectorAll("div.data-container");
-    // if (dataContainer != null) {
-    //     dataContainer.forEach(el => { // Loop through and remove each element
-    //         if (el && el.parentNode) {
-    //             el.parentNode.removeChild(el); // Safe removal
-    //         }
-    //     });
-    // }
+    removeElement("#dataInfo");
 
     const characterDetail = Object.entries(characterInfo).map(([key, value]) => {
         return { key, value };
     });
-
-    const hasDivInfo = document.querySelector("#dataInfo");
-    if (hasDivInfo){
-        hasDivInfo.remove();
-    }
 
     const dataDiv = document.querySelector("#dataDiv");
     const divInfo = document.createElement("div");
@@ -132,24 +120,11 @@ async function getCharacterInfo(characterInfo) {
 }
 
 async function createCarouselItem() {   //console.log("caro ", booksLs.data);
-    const div = document.querySelector("#carouselDiv");
-   
-    const hasImgDiv = document.querySelectorAll(".carousel-slide");
-    if (hasImgDiv) {
-        hasImgDiv.forEach(el => { // Loop through and remove each element
-            el.remove();
-            //console.log("in rev el");
-        });
-    }
-    
-    const btns = document.querySelectorAll(".carousel-btn");
-    if (btns) {                                              //console.log("btns t");
-        btns.forEach(el => {
-            el.remove();
-            //console.log("in rev el");
-        });
-    }
+    removeElement(".carousel-slide");
+    removeElement(".carousel-btn");
 
+    const div = document.querySelector("#carouselDiv");
+    
     const imgDiv = document.createElement("div");
     imgDiv.classList = "carousel-slide";
 
@@ -199,3 +174,12 @@ async function createCarouselItem() {   //console.log("caro ", booksLs.data);
     // document.body.appendChild(characterSection);
 }
 
+async function removeElement(elClass) {
+    const container = document.querySelectorAll(elClass);
+    
+    if (container) {  console.log (" in conter", elClass);
+        container.forEach(el => {
+            el.remove();
+        });
+    }
+}
