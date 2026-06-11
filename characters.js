@@ -177,7 +177,7 @@ async function createCarouselItem() {   //console.log("caro ", booksLs.data);
 async function removeElement(elClass) {
     const container = document.querySelectorAll(elClass);
     
-    if (container) {  console.log (" in conter", elClass);
+    if (container) { // console.log (" in conter", elClass);
         container.forEach(el => {
             el.remove();
         });

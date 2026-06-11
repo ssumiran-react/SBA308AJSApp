@@ -4,19 +4,18 @@ https://potterapi-fedeperin.vercel.app/en/spells/random
 */
 const basedEnURL = "https://potterapi-fedeperin.vercel.app/en";
 
-const spellSection = document.createElement("section");
-spellSection.classList = "section";
-spellSection.setAttribute("id", "spells");
+// const spellSection = document.createElement("section");
+// spellSection.classList = "section";
+// spellSection.setAttribute("id", "spells");
 const spellFrag = document.createDocumentFragment();
 
-export let spellsLs;
+let spellsLs;
 
 export async function getSpellsInfo() {
     spellList();
-    return spellsLs;
 }
 
-export async function spellList() {
+async function spellList() {
     try {
         //Using AXIOS method
         spellsLs = await axios.get(basedEnURL + "/spells", {});
@@ -28,6 +27,7 @@ export async function spellList() {
             const li = document.createElement("li");
             const p = document.createElement("p");
             p.textContent = d.spell;
+            p.style.fontSize = "medium";
             p.addEventListener("click", () => {
                 getSpellInfo(d);
             });
@@ -37,29 +37,23 @@ export async function spellList() {
         ul.classList = "submenu";
         navLi.appendChild(ul);
 
-        //createCarouselItem();
+        createCarouselItem();
 
     } catch (err) {
         console.log(" Error: ", err);
     }
 }
 
-function getSpellInfo(spellInfo) { 
-    const dataContainer = document.body.querySelectorAll("div.data-container");
-    if (dataContainer != null) {
-        dataContainer.forEach(el => { // Loop through and remove each element
-            if (el && el.parentNode) {
-                el.parentNode.removeChild(el); // Safe removal
-            }
-        });
-    }
-
-    const dataDiv = document.createElement("div");
-    dataDiv.classList = "data-container";
-
+async function getSpellInfo(spellInfo) { 
+    removeElement("#dataInfo");
+    
     const spellDetail = Object.entries(spellInfo).map(([key, value]) => {
         return { key, value };
     });
+    
+    const dataDiv = document.querySelector("#dataDiv");
+    const divInfo = document.createElement("div");
+    divInfo.setAttribute("id", "dataInfo");    
 
     for (const b of spellDetail) { //console.log("in clik", b);
         const rowDiv = document.createElement("div");
@@ -83,14 +77,21 @@ function getSpellInfo(spellInfo) {
         valDiv.appendChild(label);
         rowDiv.appendChild(labDiv);
         rowDiv.appendChild(valDiv);
-        dataDiv.appendChild(rowDiv);
+        divInfo.appendChild(rowDiv);
     }
-    spellFrag.appendChild(dataDiv);
-    spellSection.appendChild(spellFrag);
-    document.body.appendChild(spellSection);
+    dataDiv.appendChild(divInfo);
+    // spellFrag.appendChild(dataDiv);
+    // spellSection.appendChild(spellFrag);
+    // document.body.appendChild(spellSection);
 }
 
-export async function createCarouselItem() {   
+async function createCarouselItem() { 
+    removeElement(".carousel-slide");
+    removeElement(".carousel-btn");
+
+    /*
+    const div = document.querySelector("#carouselDiv");
+
     const div = document.createElement("div");
     div.classList = "carousel-container";
     const imgDiv = document.createElement("div");
@@ -138,5 +139,15 @@ export async function createCarouselItem() {
     spellFrag.appendChild(div);
     spellSection.appendChild(spellFrag);
     document.body.appendChild(spellSection);
+    */
 }
 
+async function removeElement(elClass) {
+    const container = document.querySelectorAll(elClass);
+    
+    if (container) { // console.log (" in conter", elClass);
+        container.forEach(el => {
+            el.remove();
+        });
+    }
+}

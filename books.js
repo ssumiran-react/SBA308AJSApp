@@ -42,7 +42,6 @@ async function bookList() {
     } catch (err) {
         console.log(" Error: ", err);
     }
-
 }
 
 async function getBookInfo(bookInfo) {
@@ -52,7 +51,6 @@ async function getBookInfo(bookInfo) {
     const bookDetail = Object.entries(bookInfo).map(([key, value]) => {
         return { key, value };
     });
-
 
     const dataDiv = document.querySelector("#dataDiv");
     const divInfo = document.createElement("div");
@@ -165,7 +163,7 @@ async function createCarouselItem() {   //console.log("caro ", booksLs.data);
 async function removeElement(elClass) {
     const container = document.querySelectorAll(elClass);
     
-    if (container) {  console.log (" in conter", elClass);
+    if (container) {  //console.log (" in conter", elClass);
         container.forEach(el => {
             el.remove();
         });

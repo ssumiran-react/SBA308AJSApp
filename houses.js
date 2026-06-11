@@ -4,19 +4,18 @@ https://potterapi-fedeperin.vercel.app/en/houses/random
 */
 const basedEnURL = "https://potterapi-fedeperin.vercel.app/en";
 
-const houseSection = document.createElement("section");
-houseSection.classList = "section";
-houseSection.setAttribute("id", "houses");
+// const houseSection = document.createElement("section");
+// houseSection.classList = "section";
+// houseSection.setAttribute("id", "houses");
 const houseFrag = document.createDocumentFragment();
 
-export let housesLs;
+let housesLs;
 
 export async function getHousesInfo() {
     houseList();
-    return housesLs;
 }
 
-export async function houseList() {
+async function houseList() {
     try {
         //Using AXIOS method
         housesLs = await axios.get(basedEnURL + "/houses", {});
@@ -28,6 +27,7 @@ export async function houseList() {
             const li = document.createElement("li");
             const p = document.createElement("p");
             p.textContent = d.house;
+            p.style.fontSize = "medium";
             p.addEventListener("click", () => {
                 getHouseInfo(d);
             });
@@ -44,22 +44,16 @@ export async function houseList() {
     }
 }
 
-function getHouseInfo(houseInfo) { 
-    const dataContainer = document.body.querySelectorAll("div.data-container");
-    if (dataContainer != null) {
-        dataContainer.forEach(el => { // Loop through and remove each element
-            if (el && el.parentNode) {
-                el.parentNode.removeChild(el); // Safe removal
-            }
-        });
-    }
-
-    const dataDiv = document.createElement("div");
-    dataDiv.classList = "data-container";
+async function getHouseInfo(houseInfo) { 
+    removeElement("#dataInfo");
 
     const houseDetail = Object.entries(houseInfo).map(([key, value]) => {
         return { key, value };
     });
+
+    const dataDiv = document.querySelector("#dataDiv");
+    const divInfo = document.createElement("div");
+    divInfo.setAttribute("id", "dataInfo");
 
     for (const b of houseDetail) { //console.log("in clik", b);
         const rowDiv = document.createElement("div");
@@ -96,18 +90,23 @@ function getHouseInfo(houseInfo) {
         valDiv.appendChild(label);
         rowDiv.appendChild(labDiv);
         rowDiv.appendChild(valDiv);
-        dataDiv.appendChild(rowDiv);
+        divInfo.appendChild(rowDiv);
     }
-    houseFrag.appendChild(dataDiv);
-    houseSection.appendChild(houseFrag);
-    document.body.appendChild(houseSection);
+    dataDiv.appendChild(divInfo);
+    // houseFrag.appendChild(dataDiv);
+    // houseSection.appendChild(houseFrag);
+    // document.body.appendChild(houseSection);
 }
 
-export async function createCarouselItem() {   
-    const div = document.createElement("div");
-    div.classList = "carousel-container";
+async function createCarouselItem() {   
+    removeElement(".carousel-slide");
+    removeElement(".carousel-btn");
+    
+    const div = document.querySelector("#carouselDiv");
+
     const imgDiv = document.createElement("div");
     imgDiv.classList = "carousel-slide";
+
     const preBtn = document.createElement("button");
     preBtn.classList = "carousel-btn";
     preBtn.setAttribute("id", "prevBtn");
@@ -150,8 +149,17 @@ export async function createCarouselItem() {
     //div.appendChild(preBtn);
     //div.appendChild(nexBtn);
     div.appendChild(imgDiv);
-    houseFrag.appendChild(div);
-    houseSection.appendChild(houseFrag);
-    document.body.appendChild(houseSection);
+    // houseFrag.appendChild(div);
+    // houseSection.appendChild(houseFrag);
+    // document.body.appendChild(houseSection);
 }
 
+async function removeElement(elClass) {
+    const container = document.querySelectorAll(elClass);
+    
+    if (container) {  //console.log (" in conter", elClass);
+        container.forEach(el => {
+            el.remove();
+        });
+    }
+}
